@@ -1,0 +1,8 @@
+*.idx
+*.log
+*.blg
+*.bbl
+*.aux
+*.synctex.gz
+*busy*
+
