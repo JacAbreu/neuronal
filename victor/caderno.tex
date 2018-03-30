@@ -47,6 +47,7 @@
 \usepackage{setspace}
 \usepackage{float}
 \usepackage{indentfirst}
+\usepackage{mathtools}
 \usepackage{hyphenat}
 \hyphenation{E-di-to-ra}
 
@@ -182,7 +183,9 @@ Desta maneira, a computação neuronal é uma alternativa a computação de \tex
 
 As suas aplicações são vastas e estão no campo das ciências da Computação e Engenharia. São usados como um paradigma de modelagem em Neurociência e Psicologia.  
 
-\section{Segunda aula: 16/08/2018}
+\section{Segunda aula: 16/08/2017}
+
+
 
 O cérebro humano é extremamente complexo. A informação é gerada através dos sentidos humanos e transformada, dentro no sistema nervoso central, em impulsos elétricos. Essa carga é gerada por meio de uma diferença de potencial entre as extremidades de pequenas células chamadas de neurônios. 
 
@@ -341,26 +344,142 @@ O $\mu_{i}$ vai controlar o ponto de descontinuidade da função.
 \begin{eqnarray}
 \centering
 \eta_{i}(t+1)= \Theta\left( \underbrace{\sum \omega_{i,j}\; \eta_{j}(t)}_{h_{i}}\;-\;\mu_{i}\right)
+\label{movimento}
 \end{eqnarray}
 
 Quando $\omega_{i,j}$ é positivo denominamos a sinapse de \textit{excitatória} e $\omega_{i,j}$ é negativo denominamos a sinapse de \textit{inibitória}. As somas ponderadas devem atingir ou exceder o $\omega_{i}$ para um neurônio disparar.
 
 Leitura recomendada: Wedemann,R., Avalanche: Pysica A. 
 
-\section{Modelo Matemático Simples Não-linear}
+\subsection{Modelo Matemático Simples Não-linear}
 
 \citet{McCulloch1943} provaram que uma assembleia síncrona é capaz de realizar comutação universal. ou seja, dependendo da topologia do grafo orientado completamente conexo você será capaz de solucionar qualquer tipo de função. 
 
 Uma topologia pode ser definida por meio de um grafo pelos seguintes itens: vértices, arestas e pesos. Um simples exemplo de uma topologia pode é dado a seguir:
 
 \begin{itemize}
-	\item vértices = {1,2,3}
-	\item arestas = (2,1),(1,3)
-	\item $\omega_{peso} = \omega_{1,2},\omega_{3,1} $
+	\item vértices = [1,2,3]
+	\item arestas = [(2,1),(1,3)]
+	\item $\omega_{pesos} = [\omega_{1,2},\omega_{3,1}]$
 \end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{Imagens/Fig11.png}
+	\caption{Topologia de uma rede simples de três neurônios.}
+	\label{Topologia}
+\end{figure}
+
+A saída é proporcional a entrada da rede. E esta, por sua vez, é ponderada simulando desta forma o que as células reais fazem, de acordo com $h_{i}=\omega_{i,j}\eta_{j}$.
+
+Um neurônio real produz uma sequência de pulsos. Os modelos que se aproximam dessa realidade são chamados de \textit{Spiking Neural Network}.
+
+
+\section{Terceira aula: 23/08/2017}
+
+O estado de um neurônio pode ser definido como a intensidade do seu sinal, através da equação do movimento (Eq. \ref{movimento}).
+
+\begin{eqnarray}
+\centering
+\eta_{i}(t+1)= \Theta\left( \underbrace{\sum \omega_{i,j}\; \eta_{j}(t)}_{h_{i}}\;-\;\mu_{i}\right)
+\label{movimento}
+\end{eqnarray}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{Imagens/Fig12.png}
+\caption{Limites de ativação da sinapse ou \textit{threshold}.}
+\label{Ativacao}
+\end{figure}
+
+Onde $\Theta$ é a função degrau discreta no ponto $\mu_{i}$ tende ao infinito. 
+
+\begin{eqnarray}
+\eta_{i}\coloneqq g\left(\sum_{j} \omega_{i,j} \eta_{j}-\mu_{i}\right)
+\end{eqnarray}
+	
+Em algoritmos o sinal de atribuição diz que a variável $\eta_{i}$ assumirá os valores de g (função de ativação, que dá a mudança de estado da rede). Onde $\eta_{i}$ é chamado de estado.
+
+O tempo que a informação leva para ser transferida pode ser modelada de maneira síncrona ou assíncrona. Este princípio pe chamado detecção de neurônios dependentes. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{Imagens/Fig13.png}
+\caption{Níveis diferentes de ativação em uma topologia neuronal.}
+\label{Ativacao}
+\end{figure}
+
+Em algoritmos sequenciais a atualização não é síncrona. 
+
+\subsection{Como se mapeia o caminho do sinal na rede?}
+
+O caminho é uma função do estado do neurônio em relação ao tempo. O estado da rede, portanto, é um conjunto ($\eta_{1},\eta_{2},\eta_{3}$), ou seja dos estados dos neurônios.  
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{Imagens/Fig14.png}
+	\caption{Estado de uma rede em função de $\eta(t)$ para os conjuntos $(\eta_{1},\eta_{2})$.}
+	\label{tempo}
+\end{figure}
+
+Como dito anteriormente representam-se uma rede através de grafos. E quando estes possuem somente uma direção entre os estados dos neurônios, eles são chamados de \textit{Feedfoward network}. Quando estas são ligadas entre os estados através de laços entres os neurônios, ou seja, com dois sentidos entre eles, estas são chamadas de \textit{Bi-directional network}.
+
+Nas RNA's modelos de neurônios são chamados de unidade de processamento, enquanto que as sinapses são tratadas como pesos ou conexões. Uma rede pode ser dita como robusta se o sistema não se degrada com a retirada de neurônios. Por conseguinte afirma-se que esta tem a capacidade de se adaptar aos ruídos do meio. 
+
+\section{Quarta aula: 04/10/2017}
+
+	Recapitulando o modelo de \citet{McCulloch1943} temos:
+	
+\begin{enumerate}
+	\item $\eta_{i}(t+1)= \Theta\left( \underbrace{\sum \omega_{i,j}\; \eta_{j}(t)}_{h_{i}}\;-\;\mu_{i}\right)$
+	\item $h_{i}=\sum_{j\in \text{vizinhanças}}=\omega_{i,j} \eta_{j}(t)$
+	\item $\eta_{i}(t+1)= \Theta \left(h_{i}-\mu_{i}\right)$
+\end{enumerate}
+
+  Onde $1$ é a equação de movimento, $2$ é o estado do neurônio, $3$ é a equação reduzida de movimento com o limiar de ativação $\mu_{i}$.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{Imagens/Fig15.png}
+	\caption{Orientação dos pesos entre dois neurônios i e j.}
+	\label{tempo}
+\end{figure}
+   
+O $\Theta$ que por padrão é descrito pela função degrau pode ser substituído por modelos contínuos. Os exemplos muito comuns utilizados são as funções sigmoide (Eq.\ref{sig}) e a tangente hiperbólica (Eq.\ref{hip}).
+\begin{eqnarray}
+\dfrac{1}{1+e^{-\beta(h_{i}-\mu_{i})}}
+\label{sig}	
+\end{eqnarray}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{Imagens/sigmoide.png}
+	\caption{Função Sigmoide.}
+	\label{HIP}
+\end{figure}
+
+\begin{eqnarray}
+\tanh(h_{i})
+\label{hip}
+\end{eqnarray}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{Imagens/tanh.png}
+	\caption{Tangente hiperbólica.}
+	\label{HIP}
+\end{figure}
+
+
+Na matemática neuronal as sinapses são chamadas de unidades e as conexões são denominadas de pesos. 
+
+\subsection{O modelo de \citet{Hopfield1982}}
+
 
 
 %%%%%%%%%%%%%%%%%%%Referências%%%%%%%%%%%%%%%%%
+\pagebreak
  \bibliographystyle{apa}
  \bibliography{referencias.bib}
 
