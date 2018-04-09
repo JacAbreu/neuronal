@@ -49,6 +49,7 @@
 \usepackage{indentfirst}
 \usepackage{mathtools}
 \usepackage{hyphenat}
+\usepackage{tcolorbox}
 \hyphenation{E-di-to-ra}
 
 
@@ -494,7 +495,33 @@ D_{H} = \sum_{i} [ \zeta^{\mu}_{i} (1-\xi_{i}) + (1 - \zeta^{\mu}_{i}) \xi_{i}]
 
 Onde $\xi_{i}$ é um padrão que se apresenta para a rede. Essa métrica informará o quanto um vetor se distancia do outro.
 
-A memória \textit{associativa} é um processo aonde um dado $\vec{\zeta^{\mu}}$ padrões a rede retornará $\vec{\xi_{k}}$ padrões de saída. A \textit{medida de semelhança} é a menor distância encontrada no cálculo da métrica de Hamming. 
+A memória \textit{associativa}\footnote{A memória associativa também é conhecida como memória não endereçável ou endereçável por conteúdo.} é um processo aonde um dado $\vec{\zeta^{\mu}}$ padrões a rede retornará $\vec{\xi_{k}}$ padrões de saída. A \textit{medida de semelhança} é a menor distância encontrada no cálculo da métrica de Hamming. No caso da memória associativa o padrão armazenado da rede $\vec{\zeta^{\mu}}$ é igual ao padrão apresentado ou padrão de entrada da rede $\xi_{i}$.
+
+\begin{tcolorbox}[colback=green!5,colframe=green!40!black,title=Faça a transformação de variáveis de \ref{ni} para \ref{si}.]
+	\begin{eqnarray}
+		\eta_{i}(t+1) \coloneqq \Theta\left( \underbrace{\sum \omega_{i,j}\; \eta_{j}(t)}_{h_{i}}\;-\;\mu_{i}\right) 
+		\label{ni}
+	\end{eqnarray}
+	\begin{eqnarray}
+	Onde, 
+		\Theta(x)=
+		\begin{cases}
+		1,\; se\; x>0 \\ 
+		0, \text{caso contrário}
+		\end{cases} \nonumber
+	\end{eqnarray}
+	\begin{eqnarray}
+		S_{i} \coloneqq Sgn (\sum \omega_{ij} S_{j}(t) - \theta_{i} )
+		\label{si}
+	\end{eqnarray}
+	\begin{eqnarray}
+	    Onde,
+		S_{i}= 2\eta_{i}-1\; e\;  S_{i} \in\{1,-1\} \nonumber
+	\end{eqnarray}
+	
+\end{tcolorbox}
+
+ 
 
 %%%%%%%%%%%%%%%%%%%Referências%%%%%%%%%%%%%%%%%
 \pagebreak
