@@ -476,7 +476,25 @@ Na matemática neuronal as sinapses são chamadas de unidades e as conexões sã
 
 \subsection{O modelo de \citet{Hopfield1982}}
 
+ \citet{Hopfield1982} foi o primeiro a criar um modelo que armazenasse um \textit{memória}. E isso foi feito através do problema da memória associativa onde temos $p$ é o número de padrões armazenados, $n$ é o número de neurônios, $\mu \in \{1,2,3,\hdots, p\}$, e $i \in \{1,2,3,\hdots, n\}$, $\vec{\zeta^{\mu}}$ é o padrão armazenado da rede, $\zeta^{\mu}_{i}$ é um elemento do vetor de padrões armazenados. Sendo assim, para uma rede simples com três neurônios e um padrão armazenado temos:
+ 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{Imagens/Fig19.png}
+	\caption{Podemos escrever um único padrão armazenado como $\vec{\zeta^{1}}=(-1,+1,+1)$}
+	\label{1padrao}
+\end{figure}
 
+O problema pode ser resolvido através do armazenamento de uma lista de parâmetros por meio do cômputo da distância de \textit{Hamming} que é definida pela equação \ref{hamming}.
+
+\begin{eqnarray}
+D_{H} = \sum_{i} [ \zeta^{\mu}_{i} (1-\xi_{i}) + (1 - \zeta^{\mu}_{i}) \xi_{i}]
+\label{hamming}
+\end{eqnarray}
+
+Onde $\xi_{i}$ é um padrão que se apresenta para a rede. Essa métrica informará o quanto um vetor se distancia do outro.
+
+A memória \textit{associativa} é um processo aonde um dado $\vec{\zeta^{\mu}}$ padrões a rede retornará $\vec{\xi_{k}}$ padrões de saída. A \textit{medida de semelhança} é a menor distância encontrada no cálculo da métrica de Hamming. 
 
 %%%%%%%%%%%%%%%%%%%Referências%%%%%%%%%%%%%%%%%
 \pagebreak
