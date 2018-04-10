@@ -516,14 +516,74 @@ A memória \textit{associativa}\footnote{A memória associativa também é conhe
 	\end{eqnarray}
 	\begin{eqnarray}
 	    Onde,
-		S_{i}= 2\eta_{i}-1\; e\;  S_{i} \in\{1,-1\} \nonumber
+		S_{i}= 2\eta_{i}-1\; e\;  S_{i} \in\{-1,+1\} \nonumber
 	\end{eqnarray}
 	
 \end{tcolorbox}
 
 
+\begin{tcolorbox}[colback=white!5,colframe=white!40!black,title= Demonstração]
 
+\begin{eqnarray*}
+		S_{i} & \coloneqq Sgn (\sum\limits_{j} \omega_{ij} S_{j}(t) - \theta_{i} ) \\
+		          &  \coloneqq Sgn (\sum\limits_{j} \omega_{ij} ( 2\eta_{j}-1) - \theta_{i} ) \\
+		          &  \coloneqq Sgn (\sum\limits_{j}( 2\eta_{j} \omega_{ij} - \omega_{ij} ) - \theta_{i} ) \\
+		          &  \coloneqq Sgn (2 \sum\limits_{j}\eta_{j} \omega_{ij} - \sum\limits_{j} \omega_{ij} - \theta_{i})\\
+\end{eqnarray*}
+
+Como o argumento da função Sgn tem dois possíveis valores -1 e +1. Portanto hão dois casos a serem analisados o primeiro deles são para valores do argumento $\geq 0$ e o segundo para valores do argumento $\leq 0$.  Para o primeiro caso temos:
+
+\begin{eqnarray*}
+	2 \sum_j \eta_j \omega_{ij} - \sum_j \omega_{ij} - \theta_{i}  \geq 0 \\
+	2 \sum_j \eta_j \omega_{ij} - \sum_j \omega_{ij} \geq \theta_i  \\
+	2 \sum_j \eta_j \omega_{ij}  \geq \sum_j \omega_{ij} +  \theta_i  \\
+	\sum_j \eta_j \omega_{ij} \geq \frac{1}{2} \left( \sum_j \omega_{ij} + \theta_i \right)
+\end{eqnarray*}
+
+Para o segundo caso, temos:
+
+\begin{eqnarray*}
+	2 \sum_j \eta_j \omega_{ij} - \sum_j \omega_{ij} - \theta_{i}  \leq 0 \\
+	2 \sum_j \eta_j \omega_{ij} - \sum_j \omega_{ij} \leq \theta_i  \\
+\end{eqnarray*}
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white!5,colframe=white!40!black,title= Continuação...]
+	
+	\begin{eqnarray*}	
+		2 \sum_j \eta_j \omega_{ij}  \leq \sum_j \omega_{ij} +  \theta_i  \\	
+		\sum_j \eta_j \omega_{ij} \leq \frac{1}{2} \left( \sum_j \omega_{ij} + \theta_i \right)
+	\end{eqnarray*}
+	
+	Quando o argumento $\sum\limits_{j} \omega_{ij} (2\eta_{j}-1)-\theta_{i} \geq +1$, temos:
+	
+   \begin{eqnarray*}	
+          \mu_{i}= \frac{1}{2} \left( \sum_j \omega_{ij} + \theta_i \right)
+   \end{eqnarray*}
+	
+	Isolando o $\theta_{i}$, temos:
+	
+	   \begin{eqnarray*}	
+	    2 \mu_{i}=   \sum_j \omega_{ij} + \theta_i \\
+	    \theta_{i} = 2 \mu_{i} -  \sum_j \omega_{ij}
+	   \end{eqnarray*}
+	
+	O termo $\theta_{i}$ é conhecido como \textit{Bias} ou \textit{limiar de ativação}. Ao considerarmos a tendência igual a $0$, temos que:
+	
+	\begin{eqnarray*}	
+		S_{i}= Sgn (\sum\limits_{j} \omega_{ij} S_{j})
+	\end{eqnarray*}
+\end{tcolorbox}
+
+\pagebreak
+\section{Quinta aula: 11/10/2017}
  
+ O termo $S_{i}$ é conhecido como variável de estado e o termo $\xi_{i}$ é conhecido como padrão armazenado da rede. 
+ 
+ 	\begin{eqnarray*}	
+ 		S_{i}= Sgn (\sum\limits_{j} \omega_{ij} S_{j}- \theta_{i})
+ 	\end{eqnarray*} 
 
 %%%%%%%%%%%%%%%%%%%Referências%%%%%%%%%%%%%%%%%
 \pagebreak
